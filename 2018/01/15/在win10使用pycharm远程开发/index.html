@@ -79,14 +79,17 @@
 
 
 
+<meta name="description" content="win10使用pycharm远程开发应用场景使用pycharm(pro)连接远程python解释器，在本地编写程序，远程运行，并通过xming或者xmanager等软件返回图形数据 环境简介 本地操作系统Windows10， ssh终端软件：xshell或者putty等，xserver软件：xming，xmanager 远程操作系统Ubuntu16.04，开启ssh服务  软件准备pycharm，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在win10使用pycharm远程开发">
 <meta property="og:url" content="http://yoursite.com/2018/01/15/在win10使用pycharm远程开发/index.html">
 <meta property="og:site_name" content="Vince Blog">
+<meta property="og:description" content="win10使用pycharm远程开发应用场景使用pycharm(pro)连接远程python解释器，在本地编写程序，远程运行，并通过xming或者xmanager等软件返回图形数据 环境简介 本地操作系统Windows10， ssh终端软件：xshell或者putty等，xserver软件：xming，xmanager 远程操作系统Ubuntu16.04，开启ssh服务  软件准备pycharm，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-15T09:37:06.468Z">
+<meta property="og:updated_time" content="2018-01-17T03:23:17.491Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在win10使用pycharm远程开发">
+<meta name="twitter:description" content="win10使用pycharm远程开发应用场景使用pycharm(pro)连接远程python解释器，在本地编写程序，远程运行，并通过xming或者xmanager等软件返回图形数据 环境简介 本地操作系统Windows10， ssh终端软件：xshell或者putty等，xserver软件：xming，xmanager 远程操作系统Ubuntu16.04，开启ssh服务  软件准备pycharm，">
 
 
 
@@ -298,7 +301,16 @@
       
 
       
-        
+        <h1 id="win10使用pycharm远程开发"><a href="#win10使用pycharm远程开发" class="headerlink" title="win10使用pycharm远程开发"></a>win10使用pycharm远程开发</h1><h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>使用pycharm(pro)连接远程python解释器，在本地编写程序，远程运行，并通过xming或者xmanager等软件返回图形数据</p>
+<h2 id="环境简介"><a href="#环境简介" class="headerlink" title="环境简介"></a>环境简介</h2><ul>
+<li>本地操作系统Windows10， ssh终端软件：xshell或者putty等，xserver软件：xming，xmanager</li>
+<li>远程操作系统Ubuntu16.04，开启ssh服务</li>
+</ul>
+<h2 id="软件准备"><a href="#软件准备" class="headerlink" title="软件准备"></a>软件准备</h2><p><a href="https://www.jetbrains.com/zh/pycharm/download/download-thanks.html" target="_blank" rel="noopener">pycharm</a>，拥有学生邮箱的朋友可以授权使用专业版一年，推荐支持正版（注：远程解释器只在专业版中支持）。 当然无法使用专业版的朋友可以在远程主机上安装pycharm 社区版，在终端配合xming远程开发（类似teamviewer的效果）</p>
+<p><a href="https://www.netsarang.com/products/xsh_overview.html" target="_blank" rel="noopener">xshell</a>个人使用免费， <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/" target="_blank" rel="noopener">putty</a>免费 ，二选一</p>
+<p><a href="https://www.netsarang.com/products/xmg_overview.html" target="_blank" rel="noopener">xmanager</a>收费，建议土豪使用，<a href="https://sourceforge.net/projects/xming/" target="_blank" rel="noopener">xming</a> 免费， 推荐</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>ssh client 开启 x11 forwarding 选项<br>pycharm config 设置 DISPALY 环境变量， 具体在远程终端 echo $DISPLAY 查看</p>
+
       
     </div>
     
@@ -384,8 +396,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -455,6 +476,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#win10使用pycharm远程开发"><span class="nav-number">1.</span> <span class="nav-text">win10使用pycharm远程开发</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用场景"><span class="nav-number">1.1.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境简介"><span class="nav-number">1.2.</span> <span class="nav-text">环境简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件准备"><span class="nav-number">1.3.</span> <span class="nav-text">软件准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">1.4.</span> <span class="nav-text">配置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
