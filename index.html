@@ -231,6 +231,140 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/30/Ubuntu16-04-下安装-Caffe2-以及运行Detectron/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="VinceJia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Vince Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/30/Ubuntu16-04-下安装-Caffe2-以及运行Detectron/" itemprop="url">Ubuntu16.04 下安装 Caffe2 以及运行Detectron</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-30T19:39:59+08:00">
+                2018-01-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Ubuntu16-04-下安装-Caffe2-以及运行Detectron"><a href="#Ubuntu16-04-下安装-Caffe2-以及运行Detectron" class="headerlink" title="Ubuntu16.04 下安装 Caffe2 以及运行Detectron"></a>Ubuntu16.04 下安装 Caffe2 以及运行Detectron</h1><h2 id="基本说明"><a href="#基本说明" class="headerlink" title="基本说明"></a>基本说明</h2><ul>
+<li>教程适用于caffe2-gpu版本在ubuntu16.04 操作系统的源码编译安装</li>
+<li>作者习惯使用Anaconda作为python科学计算和深度学习开发环境，使用conda包管理器安装编译</li>
+<li>更多细节参考官网</li>
+</ul>
+<h2 id="Cuda8-0-amp-Cudnn-v6安装"><a href="#Cuda8-0-amp-Cudnn-v6安装" class="headerlink" title="Cuda8.0 &amp; Cudnn-v6安装"></a>Cuda8.0 &amp; Cudnn-v6安装</h2><p>目前caffe2 官网推荐的版本如标题（注意这里使用的是cuda8.0的runfile（local）文件）</p>
+<p>这里是nvidia给出的<a href="http://docs.nvidia.com/cuda/cuda-installation-guide-linux/#axzz4HIBXnwyt" target="_blank" rel="noopener">官方安装指南</a>（遇到问题时可以查阅)<br>下载完cuda8.0后，执行如下语句，运行runfile文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh cuda_8.0.27_linux.run</span><br></pre></td></tr></table></figure>
+<p>因为驱动之前已经安装，这里就不要选择安装驱动。其余的都直接默认或者选择是即可。<br>使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/profile</span><br></pre></td></tr></table></figure>
+<p>打开“profile”文件，在末尾处添加（注意不要有空格，不然会报错):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/usr/local/cuda-8.0/bin:$PATH</span><br><span class="line">export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64$LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure>
+<h2 id="Anaconda-安装准备"><a href="#Anaconda-安装准备" class="headerlink" title="Anaconda 安装准备"></a>Anaconda 安装准备</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># Create a conda environment (optional)</span><br><span class="line">conda create -n my_caffe2_env &amp;&amp; source activate my_caffe2_env</span><br><span class="line"></span><br><span class="line"># Install required packages</span><br><span class="line"># mkl isn&apos;t actually required, but is really recommended for Anaconda</span><br><span class="line">conda install -y \</span><br><span class="line">    future \</span><br><span class="line">    glog \</span><br><span class="line">    lmdb \</span><br><span class="line">    mkl \</span><br><span class="line">    mkl-include \</span><br><span class="line">    numpy \</span><br><span class="line">    opencv \</span><br><span class="line">    protobuf \</span><br><span class="line">    snappy \</span><br><span class="line">    six</span><br></pre></td></tr></table></figure>
+<h2 id="下载caffe2源码-amp-编译-amp-安装"><a href="#下载caffe2源码-amp-编译-amp-安装" class="headerlink" title="下载caffe2源码 &amp; 编译 &amp; 安装"></a>下载caffe2源码 &amp; 编译 &amp; 安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Clone Caffe2</span><br><span class="line">cd ~ &amp;&amp; git clone --recursive https://github.com/caffe2/caffe2.git &amp;&amp; cd caffe2</span><br><span class="line"></span><br><span class="line"># Make Caffe2 in a separate folder to avoid polluting the Caffe2 source tree.</span><br><span class="line"># This can be anywhere you want it</span><br><span class="line">mkdir build &amp;&amp; cd build</span><br><span class="line"></span><br><span class="line"># Add flags to this command to control which packages you want to use. The</span><br><span class="line"># options to use are at the top of CMakeLists.txt in the topmost Caffe2</span><br><span class="line"># directory</span><br><span class="line">cmake -DUSE_CUDA=ON  -DUSE_NCCL=ON -DUSE_LEVELDB=OFF -DCMAKE_PREFIX_PATH=~/anaconda2/envs/my_caffe2_env -DCMAKE_INSTALL_PREFIX=~/anaconda2/envs/my_caffe2_env ..</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<h2 id="测试安装"><a href="#测试安装" class="headerlink" title="测试安装"></a>测试安装</h2><p><code>from caffe2.python import core</code>.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/26/pytorch可视化工具visdom安装使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1427,7 +1561,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
